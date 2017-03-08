@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report final!" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="76b1e275-5694-4bda-8d7a-3e5fd3beccd7">
+	<property name="ireport.zoom" value="1.0245201830476058"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="179"/>
+	<parameter name="Bus_Num" class="java.lang.String"/>
+	<parameter name="From" class="java.lang.String"/>
+	<parameter name="To" class="java.lang.String"/>
+	<parameter name="Conductor_ID" class="java.lang.String"/>
+	<parameter name="Date" class="java.lang.String"/>
+	<parameter name="tcargo" class="java.lang.String"/>
+	<parameter name="tcamount" class="java.lang.String"/>
+	<parameter name="tpassnd" class="java.lang.String"/>
+	<parameter name="tamountnd" class="java.lang.String"/>
+	<parameter name="tpassd" class="java.lang.String"/>
+	<parameter name="tamountd" class="java.lang.String"/>
+	<parameter name="ttamount" class="java.lang.String"/>
+	<parameter name="parameter2" class="java.lang.String"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT t.Date_issue, count(t.Ticket_Num) as tpass,  sum(t.Total_Amount) as tamount FROM ticket as t
+            INNER JOIN distance_traveled as d on d.Distance_code=t.Distance_code
+            WHERE t.Bus_Num LIKE  $P{Bus_Num}
+            and t.Employee_ID LIKE $P{Conductor_ID}
+            and d.distance_base Like  $P{From}
+            and d.distance_to like $P{To}
+            and  t.Cargo_code = 0;]]>
+	</queryString>
+	<field name="Date_issue" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tpass" class="java.lang.Long"/>
+	<field name="tamount" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="131" y="21" width="366" height="38" uuid="73a959d3-e6a4-44b5-bd9e-239bb697c2fd"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remittance Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="141" splitType="Stretch">
+			<staticText>
+				<reportElement x="297" y="4" width="60" height="27" uuid="a03b15e2-5b90-459d-915e-c48d494ea146"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="31" width="100" height="27" uuid="ed00c510-9b72-4700-a564-b5e55f2d719d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bus number :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="58" width="100" height="27" uuid="a3ee0fa3-b029-433c-b7e8-db0d9683a7a6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[From  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="85" width="100" height="27" uuid="78e0f05e-018e-405a-830d-2382fab4be8a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[To :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="112" width="122" height="27" uuid="77b3799d-9cde-43af-8d21-27b97eaba492"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conductor Name  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="38" width="100" height="20" uuid="d4a19a43-66a5-43cc-b4ad-2cc929d32aa2"/>
+				<textFieldExpression><![CDATA[$P{Bus_Num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="65" width="100" height="20" uuid="9d4bffc1-7ce3-4769-a397-5ad1b8f47a1d"/>
+				<textFieldExpression><![CDATA[$P{From}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="92" width="100" height="20" uuid="8c45e44a-87f6-4106-a8cf-3b55d93611a3"/>
+				<textFieldExpression><![CDATA[$P{To}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="119" width="100" height="20" uuid="9a0d9057-f31d-44c2-ac11-98fd8689b5a8"/>
+				<textFieldExpression><![CDATA[$P{Conductor_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="11" width="100" height="20" uuid="c7194cea-4730-460d-8e8c-7cdc21232a8d"/>
+				<textFieldExpression><![CDATA[$F{Date_issue}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="337" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="50" width="208" height="30" uuid="76e77ead-2eb4-4508-90d4-28eb258343cf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total no. of normal passenger(s) :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="80" width="211" height="30" uuid="2080a1f5-4190-4490-9158-1cf799d366c7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total no. of discounted passenger(s) :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="80" width="147" height="30" uuid="2c49ab09-8097-423f-9e36-d113eb3cf68f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total cash discounted :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="111" width="147" height="30" uuid="3ceead30-29a8-43aa-bf62-a42398fb380f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Passenger Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="110" width="211" height="30" uuid="efc70758-07e0-4ddb-a62f-72d31f824507"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Passengers:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="101" height="30" uuid="cd15cd30-e54d-45a3-b328-fa76f40a4aaf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PASSENGER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="50" width="147" height="30" uuid="721448e2-6af7-4f44-aa57-61d74787140f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total cash  not discounted :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="165" width="101" height="30" uuid="23c0ea63-025d-42f8-ac78-4b40a0a2b52a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="212" width="159" height="30" uuid="d1e5d15c-390c-4e17-bee8-9d161ff23ad7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total no. of normal cargo(s) :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="212" width="111" height="30" uuid="1fd15c1a-cf36-4863-b6d4-f341dc628afe"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Cargo Amount]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="120" width="100" height="20" uuid="3a0d8387-ff10-4673-8917-b4de3b20b0d7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tpass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="119" width="82" height="20" uuid="2a69ea3e-90b3-465e-a3bc-2015057504be"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="222" width="100" height="20" uuid="67dd19e2-4a19-4b01-9545-2fdcd2ffeb6b"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tcargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="222" width="82" height="20" uuid="c6d951a8-d702-4cc0-a88d-ff222e7748f8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tcamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="59" width="100" height="20" uuid="0a271d9d-e1b1-4d03-8a27-90cf7211f597"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tpassnd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="59" width="82" height="20" uuid="3ec21396-a8c8-4523-b323-b359d2b35857"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tamountnd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="219" y="89" width="100" height="20" uuid="d76879cf-34bf-4cc3-b54a-c6922a6d20a9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tpassd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="90" width="82" height="20" uuid="cbd359e4-68cd-4ec7-891e-77f29a35858c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tamountd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="311" y="274" width="111" height="30" uuid="6028d29d-5e30-4d21-885f-370caa0985ef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Remittances:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="487" y="274" width="82" height="30" forecolor="#FF0000" uuid="27eafdd6-2a24-4827-b9fa-b12438a2218c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ttamount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="131" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
